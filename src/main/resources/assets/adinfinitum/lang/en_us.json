@@ -1,0 +1,12 @@
+{
+  "item.adinfinitum.coke": "Coke",
+  "item.adinfinitum.nugget_graphite": "Graphite Flake",
+  "item.adinfinitum.brick_bloomery": "Bloomery Brick",
+
+  "block.adinfinitum.anthracite_ore": "Anthracite Ore",
+  "block.adinfinitum.bloomery": "Bloomery",
+
+  "gui.adinfinitum.bloomery":  "Bloomery",
+
+  "itemGroup.blockGroupTab": "Ad Infinitum"
+}

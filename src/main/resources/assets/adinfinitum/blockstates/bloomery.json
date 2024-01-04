@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "": {
+      "model": "adinfinitum:block/bloomery"
+    },
+    "facing=east": {
+      "model": "adinfinitum:block/bloomery",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adinfinitum:block/bloomery"
+    },
+    "facing=south": {
+      "model": "adinfinitum:block/bloomery",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "adinfinitum:block/bloomery",
+      "y": 270
+    }
+  }
+}

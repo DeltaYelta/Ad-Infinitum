@@ -1,0 +1,71 @@
+package net.deltayelta.adinfinitum.world.gen;
+
+import net.deltayelta.adinfinitum.block.ModBlocks;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+
+
+public class OreFeatureARCHIVE {
+    /*
+    Kaupenjoe
+    private static void spawnOreOverworld(OreType ore, BiomeLoadingEvent event) {
+        AdInfinitum.LOGGER.debug("Spawning ore!");
+        OreFeatureConfig oreFeatureConfig = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                ore.getBlock().get().getDefaultState(), ore.getMaxVeinSize());
+
+        ConfiguredPlacement<TopSolidRangeConfig> configuredPlacement = Placement.RANGE.configure(
+                new TopSolidRangeConfig(ore.getMinHeight(), ore.getMinHeight(), ore.getMaxHeight()));
+
+        ConfiguredFeature<?, ?> oreFeature = registerOreFeature(ore, oreFeatureConfig, configuredPlacement);
+
+        event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(() -> oreFeature);
+    }
+    */
+    /*
+    HigherThanDiamonds
+    public static ConfiguredFeature<?, ?> buildOverworldOre(BlockState bstate, int veinSize, int minHeight, int maxHeight) {
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, bstate.getBlock().getRegistryName(), Feature.ORE.withConfiguration(
+                new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, bstate, veinSize)
+                ).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(minHeight, minHeight, maxHeight))).square());
+
+        return Feature.ORE.withConfiguration(
+                new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                        bstate, veinSize)).withPlacement(Placement.RANGE.configure(
+                new TopSolidRangeConfig(minHeight, minHeight, maxHeight))).square();
+    }
+    */
+    /*
+    Just a general fail
+
+    private static void addOreFeature(BlockState blockState, BiomeLoadingEvent event, int maxVeinSize, int maxHeight) {
+        BiomeGenerationSettingsBuilder gen = event.getGeneration();
+
+        event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES);
+    }
+    */
+
+    public static ConfiguredFeature<?, ?> anthraciteOreConfig;
+    // The source of all my problems in life (I would assume)
+    // Seriously, this sucked to figure out
+    @SubscribeEvent
+    public static void oreSetup(FMLCommonSetupEvent event) {
+
+        // Anthracite
+        anthraciteOreConfig = register("anthracite_ore", Feature.ORE.withConfiguration(
+                new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                        ModBlocks.ANTHRACITE_ORE.get().getDefaultState(), 
+                        2
+                )
+        ).range(56).square().count(12));
+    }
+
+    private static ConfiguredFeature<?,?> register(String key, ConfiguredFeature<?,?> configuredFeature) {
+        // return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(AdInfinitum.MOD_ID, key), configuredFeature);
+        return null;
+    }
+
+}

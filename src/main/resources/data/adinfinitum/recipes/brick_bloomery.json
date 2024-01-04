@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "adinfinitum:nugget_graphite"
+    },
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:dirt"
+    }
+
+  ],
+  "result": {
+    "item": "adinfinitum:brick_bloomery",
+    "count": 4
+  }
+}
