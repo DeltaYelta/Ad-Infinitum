@@ -23,19 +23,54 @@ public class BloomeryTile extends TileEntity implements ITickableTileEntity {
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     int burnTime;
-    int burnTimeTotal;
+    int burnTimeTotal = 100;
     int cookTime;
-    int cookTimeTotal;
+    int cookTimeTotal = 200;
     public BloomeryTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
-    public void tick() {};
+    public void tick() {
+        if (burnTime > 0) {
+            burnTime--;
+        }
+        if(cookTime > 0) {
+            cookTime--;
+        }
+        if(burnTime == 0 && canSmelt()) {
+            burnTime = burnTimeTotal;
+            cookTime = cookTimeTotal;
+            ItemStack input = itemStackHandler.getStackInSlot(0);
+            input.shrink(1);
+            if (input.isEmpty()) {
+                itemStackHandler.setStackInSlot(0, ItemStack.EMPTY);
+            }
+            ItemStack output = itemStackHandler.getStackInSlot(2);
+            if (output.isEmpty()) {
+                itemStackHandler.setStackInSlot(2, new ItemStack(Items.IRON_BARS));
+            } else if (output.getItem() == input.getItem()) {
+                output.grow(1);
+            }
+        }
+    }
 
     public BloomeryTile() {
         this(ModTileEntities.BLOOMERY_TILE.get());
     }
 
+    private boolean canSmelt() {
+        ItemStack input = itemStackHandler.getStackInSlot(0);
+        if (input.isEmpty()) { // No input
+            return false;
+        }
+        ItemStack fuel = itemStackHandler.getStackInSlot(1);
+        if (fuel.isEmpty() || fuel.getItem() != Items.CHARCOAL) { // No fuel or wrong item in fuel, wrong item shouldn't happen
+            return false;
+        }
+        ItemStack output = itemStackHandler.getStackInSlot(2);
+
+        return output.getCount() < output.getMaxStackSize();// Output isn't full
+    }
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         itemStackHandler.deserializeNBT(nbt.getCompound("inv"));
